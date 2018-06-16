@@ -26,6 +26,24 @@ namespace AccountManager
 
 			// Lokacja gdzie pojwi się główne okno ustawione na środek ekranu
 			WindowStartupLocation = WindowStartupLocation.CenterScreen;
+			var acc1 = new PersonalAccount(1233);
+			var credit = new CreditCard(124);
+
+			Console.WriteLine(acc1);
+			acc1.WithdrawMoney(100);
+			Console.WriteLine(acc1);
+
+			Console.WriteLine(credit);
+			acc1.WithdrawMoney(100);
+			Console.WriteLine(credit);
+
+			Console.WriteLine(credit);
+			acc1.DepositMoney(150);
+			Console.WriteLine(credit);
+
+			Console.WriteLine(credit);
+			acc1.DepositMoney(100);
+			Console.WriteLine(credit);
 		}
 
 		private void AddCustomerButton_Click(object sender, RoutedEventArgs e)
