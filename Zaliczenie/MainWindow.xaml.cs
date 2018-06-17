@@ -25,7 +25,6 @@ namespace AccountManager
 		// trochę "bez sensu" (np. musimy znać unikalne ID zanim w ogóle stworzymy konto)
 		// dlatego zadeklarujemy tutaj kilka rzeczy do obsługi kont i klientów
 		public ObservableCollection<Client> Clients { get; }
-		public Dictionary<AccountType, string> AccountTypes { get; }
 
 		public MainWindow()
 		{
@@ -33,7 +32,6 @@ namespace AccountManager
 			// aktualizację widoku Comboboxa
 			// za sprawą INotifyPropertyChanged 
 			Clients = new ObservableCollection<Client>();
-			AccountTypes = AccountTypeName.AccountTypes;
 
 			InitializeComponent();
 			
