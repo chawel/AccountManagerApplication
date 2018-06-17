@@ -84,6 +84,7 @@
     <Compile Include="Account.cs" />
     <Compile Include="AccountNumber.cs" />
     <Compile Include="AccountTypeName.cs" />
+    <Compile Include="AccountTypeNameConverter.cs" />
     <Compile Include="AccountWindow.xaml.cs">
       <DependentUpon>AccountWindow.xaml</DependentUpon>
     </Compile>

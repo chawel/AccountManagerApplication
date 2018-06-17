@@ -31,13 +31,14 @@
 
 		<Grid Grid.Row="1" Margin="5">
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="1*"></ColumnDefinition>
-				<ColumnDefinition Width="3*"></ColumnDefinition>
+				<ColumnDefinition Width="32*"></ColumnDefinition>
+				<ColumnDefinition Width="15*"></ColumnDefinition>
+				<ColumnDefinition Width="81*"/>
 			</Grid.ColumnDefinitions>
 
-			<Label Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">Rodzaj konta:</Label>
+			<Label Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8,2">Rodzaj konta:</Label>
 			<ComboBox x:Name="AccountTypeListCombo" Grid.Column="1" ItemsSource="{Binding Path=AccountTypes}"
-					  SelectedValuePath="Key" DisplayMemberPath="Value" SelectedIndex="0">
+					  SelectedValuePath="Key" DisplayMemberPath="Value" SelectedIndex="0" Grid.ColumnSpan="2">
 			</ComboBox>
 		</Grid>
 

@@ -24,21 +24,18 @@ namespace AccountManager
 		// Ze względu na treść zadania musimy kilka rzeczy zrobić
 		// trochę "bez sensu" (np. musimy znać unikalne ID zanim w ogóle stworzymy konto)
 		// dlatego zadeklarujemy tutaj kilka rzeczy do obsługi kont i klientów
-		private ObservableCollection<Client> Clients;
+		public ObservableCollection<Client> Clients { get; }
+		public Dictionary<AccountType, string> AccountTypes { get; }
 
 		public MainWindow()
 		{
-			Clients = new ObservableCollection<Client>();
-
-			InitializeComponent();
-
 			// ObservableCollection sam będzie dbał o
 			// aktualizację widoku Comboboxa
 			// za sprawą INotifyPropertyChanged 
-			CustomerListCombo.ItemsSource = Clients;
+			Clients = new ObservableCollection<Client>();
+			AccountTypes = AccountTypeName.AccountTypes;
 
-			// Lokacja gdzie pojwi się główne okno ustawione na środek ekranu
-			WindowStartupLocation = WindowStartupLocation.CenterScreen;
+			InitializeComponent();
 			
 			DataContext = this;
 		}

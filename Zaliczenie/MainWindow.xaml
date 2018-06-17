@@ -8,9 +8,10 @@
         Title="Account Manager"
 		MinWidth="400"
 		MinHeight="300"
-		SizeToContent="WidthAndHeight">
+		SizeToContent="WidthAndHeight"
+		WindowStartupLocation="CenterScreen">
 	<Window.Resources>
-		<AlternationConverter x:Key="AlternationConverter"/>
+		<local:AccountTypeNameConverter x:Key="AccountTypeNameConverter"/>
 	</Window.Resources>
 	<Grid x:Name="MainGrid">
 		<Grid.RowDefinitions>
@@ -27,7 +28,7 @@
 				</Grid.ColumnDefinitions>
 
 			<Label Grid.Column="0" Content="Wybierz klienta:" VerticalAlignment="Center"/>
-			<ComboBox x:Name="CustomerListCombo" Grid.Column="1" IsReadOnly="True" Margin="5" DisplayMemberPath="Surname" SelectionChanged="CustomerListCombo_SelectionChanged"/>
+			<ComboBox x:Name="CustomerListCombo" Grid.Column="1" IsReadOnly="True" Margin="5" ItemsSource="{Binding Clients}" DisplayMemberPath="Surname" SelectionChanged="CustomerListCombo_SelectionChanged"/>
 			<Button x:Name="AddCustomerButton" Grid.Column="2" Margin="5" Click="AddCustomerButton_Click">Dodaj</Button>
 		</Grid>
 
@@ -42,7 +43,7 @@
 					<ListView.View>
 						<GridView ColumnHeaderToolTip="Informacje o kontach klienta" AllowsColumnReorder="False">
 							<GridViewColumn DisplayMemberBinding="{Binding IdentificationNumber}" Header="Numer" Width="100"/>
-							<GridViewColumn DisplayMemberBinding="{Binding AccountType}" Header="Rodzaj" Width="100"/>
+							<GridViewColumn DisplayMemberBinding="{Binding AccountType, Converter={StaticResource AccountTypeNameConverter}}" Header="Rodzaj" Width="100"/>
 							<GridViewColumn DisplayMemberBinding="{Binding Balance}" Header="Saldo" Width="100"/>
 						</GridView>
 					</ListView.View>

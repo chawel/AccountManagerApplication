@@ -21,19 +21,15 @@ namespace AccountManager
 	{
 		// Ważne aby dodać getter i setter
 		public int UniqueAccountNumber { get; set; }
+		public Dictionary<AccountType, string> AccountTypes { get; }
 
 		public AccountWindow()
 		{
 			// Generujemy za każdym otwarciem okna nowy unikalny numer konta
-			UniqueAccountNumber = AccountNumber.GenerateAccountNumber();
+			UniqueAccountNumber = AccountNumberGenerator.Generate();
+			AccountTypes = AccountTypeName.AccountTypes;
 
 			InitializeComponent();
-
-			// Ustawiamy tekst kontrolki
-			AccountNumberTextBox.Text = UniqueAccountNumber.ToString();
-
-			// Boże wybacz...
-			AccountTypeListCombo.ItemsSource =  AccountTypeName.AccountTypes;
 
 			// Ustawiamy contekst dla tego okna na to okno 
 			// (bez sensu ale trzeba, aby można było bindować dane do kontrolek)
