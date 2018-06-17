@@ -19,9 +19,25 @@ namespace AccountManager
 	/// </summary>
 	public partial class AccountWindow : Window
 	{
+		// Ważne aby dodać getter i setter
+		public int UniqueAccountNumber { get; set; }
+
 		public AccountWindow()
 		{
+			// Generujemy za każdym otwarciem okna nowy unikalny numer konta
+			UniqueAccountNumber = AccountNumber.GenerateAccountNumber();
+
 			InitializeComponent();
+
+			// Ustawiamy tekst kontrolki
+			AccountNumberTextBox.Text = UniqueAccountNumber.ToString();
+
+			// Boże wybacz...
+			AccountTypeListCombo.ItemsSource =  AccountTypeName.AccountTypes;
+
+			// Ustawiamy contekst dla tego okna na to okno 
+			// (bez sensu ale trzeba, aby można było bindować dane do kontrolek)
+			DataContext = this;
 		}
 
 		private void CancelButton_Click(object sender, RoutedEventArgs e)

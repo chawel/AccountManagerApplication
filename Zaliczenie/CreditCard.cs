@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace AccountManager
 {
-	class CreditCard : Account
+	public class CreditCard : Account
 	{
-
-		public CreditCard(int identificationNumber) : base(identificationNumber, "Karta kredytowa") { }
+		public CreditCard(int identificationNumber) : base(AccountType.CreditCard, identificationNumber) { }
 
 		public override void DepositMoney(decimal cashAmount)
 		{

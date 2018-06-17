@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace AccountManager
 {
-	class PersonalAccount : Account
+	public class PersonalAccount : Account
 	{
-		public PersonalAccount(int identificationNumber) : base(identificationNumber, "Rachunek Oszczędnościowo - Rozliczeniowy") { }
+		public PersonalAccount(int identificationNumber) : base(AccountType.PersonalAccount, identificationNumber) { }
 
 		public override void DepositMoney(decimal cashAmount)
 		{
@@ -20,7 +20,7 @@ namespace AccountManager
 		public override void WithdrawMoney(decimal cashAmount)
 		{
 			// Ustalamy, że nie można pobrać więcej niż jest na koncie
-			if (Balance > cashAmount) Balance -= cashAmount;
+			if (Balance >= cashAmount) Balance -= cashAmount;
 		}
 	}
 }

@@ -9,6 +9,9 @@
 		MinWidth="400"
 		MinHeight="300"
 		SizeToContent="WidthAndHeight">
+	<Window.Resources>
+		<AlternationConverter x:Key="AlternationConverter"/>
+	</Window.Resources>
 	<Grid x:Name="MainGrid">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="auto"></RowDefinition>
@@ -24,21 +27,30 @@
 				</Grid.ColumnDefinitions>
 
 			<Label Grid.Column="0" Content="Wybierz klienta:" VerticalAlignment="Center"/>
-			<ComboBox x:Name="CustomerListCombo" Grid.Column="1" IsReadOnly="True" Margin="5"/>
+			<ComboBox x:Name="CustomerListCombo" Grid.Column="1" IsReadOnly="True" Margin="5" DisplayMemberPath="Surname" SelectionChanged="CustomerListCombo_SelectionChanged"/>
 			<Button x:Name="AddCustomerButton" Grid.Column="2" Margin="5" Click="AddCustomerButton_Click">Dodaj</Button>
 		</Grid>
 
 		<GroupBox x:Name="CustomerAccountBox" Header="Konta klienta" Grid.Row="1" Margin="5">
 				<Grid x:Name="CustomerAccountGrid">
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="2*"></ColumnDefinition>
-						<ColumnDefinition Width="1*"></ColumnDefinition>
-					</Grid.ColumnDefinitions>
-				<ListBox x:Name="CustomerAccountListBox" Grid.Column="0" Margin="5"/>
-					<StackPanel x:Name="AccountManagePanel" Grid.Column="1" Margin="5">
-					<Button x:Name="AddAccountButton" Margin="5" Click="AddAccountButton_Click">Dodaj konto</Button>
-					<Button x:Name="DeleteAccountButton" Margin="5">Usuń konto</Button>
-					</StackPanel>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="2*"></ColumnDefinition>
+					<ColumnDefinition Width="1*"></ColumnDefinition>
+				</Grid.ColumnDefinitions>
+				<ListView x:Name="CustomerAccountListView" Grid.Column="0" Margin="5" 
+						  ItemsSource="{Binding ElementName=selectedClient, Path=Accounts}">
+					<ListView.View>
+						<GridView ColumnHeaderToolTip="Informacje o kontach klienta" AllowsColumnReorder="False">
+							<GridViewColumn DisplayMemberBinding="{Binding IdentificationNumber}" Header="Numer" Width="100"/>
+							<GridViewColumn DisplayMemberBinding="{Binding AccountType}" Header="Rodzaj" Width="100"/>
+							<GridViewColumn DisplayMemberBinding="{Binding Balance}" Header="Saldo" Width="100"/>
+						</GridView>
+					</ListView.View>
+				</ListView>
+				<StackPanel x:Name="AccountManagePanel" Grid.Column="1" Margin="5">
+					<Button x:Name="AddAccountButton" Margin="5" Click="AddAccountButton_Click" IsEnabled="False">Dodaj konto</Button>
+					<Button x:Name="DeleteAccountButton" Margin="5" IsEnabled="False" Click="DeleteAccountButton_Click">Usuń konto</Button>
+				</StackPanel>
 				</Grid>
 		</GroupBox>
 
@@ -50,8 +62,8 @@
 					<ColumnDefinition Width="1*"/>
 				</Grid.ColumnDefinitions>
 				<TextBox x:Name="AmountTextBox" Grid.Column="0" Margin="5"/>
-				<Button x:Name="DepositButton" Grid.Column="1" Content="Wpłać" Margin="5"/>
-				<Button x:Name="WithdrawButton" Grid.Column="2" Content="Wypłać" Margin="5"/>
+				<Button x:Name="DepositButton" Grid.Column="1" Content="Wpłać" Margin="5" Click="DepositButton_Click"/>
+				<Button x:Name="WithdrawButton" Grid.Column="2" Content="Wypłać" Margin="5" Click="WithdrawButton_Click"/>
 			</Grid>
 		</GroupBox>
 	</Grid>

@@ -4,11 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AccountManager"
+		xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="Dodaj konto"
 		Width="400"
 		Height="150"
-		ResizeMode="NoResize">
+		ResizeMode="NoResize"
+		>
+
 	<Grid x:Name="MainGrid">
 		<Grid.RowDefinitions>
 			<RowDefinition></RowDefinition>
@@ -23,7 +26,7 @@
 			</Grid.ColumnDefinitions>
 
 			<Label Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">Numer konta:</Label>
-			<TextBox x:Name="AccountNumberTextBox" Grid.Column="1" IsReadOnly="True" IsEnabled="False"></TextBox>
+			<TextBox x:Name="AccountNumberTextBox" Grid.Column="1" IsReadOnly="True" IsEnabled="False" Text="{Binding Path=UniqueAccountNumber}"/>
 		</Grid>
 
 		<Grid Grid.Row="1" Margin="5">
@@ -33,7 +36,9 @@
 			</Grid.ColumnDefinitions>
 
 			<Label Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">Rodzaj konta:</Label>
-			<ComboBox x:Name="AccountTypeListCombo" Grid.Column="1"></ComboBox>
+			<ComboBox x:Name="AccountTypeListCombo" Grid.Column="1" ItemsSource="{Binding Path=AccountTypes}"
+					  SelectedValuePath="Key" DisplayMemberPath="Value" SelectedIndex="0">
+			</ComboBox>
 		</Grid>
 
 		<Grid Grid.Row="2">

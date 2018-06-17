@@ -2,13 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace AccountManager
 {
+	/// <summary>
+	/// Zbiór rodzajów kont
+	/// </summary>
+	public enum AccountType
+	{
+		PersonalAccount,
+		DepositAccount,
+		CreditCard
+	}
+
 	// Dziedziczymy interfejs IEquatable aby spełnić kontrakt
 	// i napisać własną implementację metody Equals
 	// Przyda się to do porównywania obiektów po IdentificationNumber
+	// w HashSet (aby spróbować zachować unikalność kont)
 	public abstract class Account : IEquatable<Account>
 	{
 		#region Properties
@@ -24,26 +36,33 @@ namespace AccountManager
 		// "d" - double
 		// "f" - float
 		public decimal Balance { get; protected set; } = 0.00m;
-		public string AccountType { get; protected set; }
+		public AccountType AccountType { get; protected set; }
 		public int IdentificationNumber { get; protected set; }
 		#endregion
 
-		public Account(int identificationNumber, string accountType)
+		#region Konstruktor
+		public Account(AccountType accountType, int identificationNumber)
 		{
 			this.IdentificationNumber = identificationNumber;
 			this.AccountType = accountType;
 		}
+		#endregion
 
+		#region Kontrakt
 		// Deklarujemy kontrakty na metody
 		// kontrakt oznacza że musimy takie same metody
 		// zaimplementować w naszej klasie pochodnej
 		// inaczej kompilator nie zbuduje projektu
-		public abstract void DepositMoney(decimal cashAmount);
-		public abstract void WithdrawMoney(decimal cashAmount);
+		public abstract void DepositMoney(decimal moneyAmount);
+		public abstract void WithdrawMoney(decimal moneyAmount);
+		#endregion
 
 		public override string ToString()
 		{
-			return String.Format("Account type: {0} Account number: {1} Balance: {2}", this.AccountType, this.IdentificationNumber.ToString(), this.Balance.ToString());
+			return String.Format("Account type: {0} Account number: {1} Balance: {2}",
+				AccountTypeName.AccountTypes[this.AccountType], 
+				this.IdentificationNumber.ToString(), 
+				this.Balance.ToString());
 		}
 
 		// Spełniamy kontrakt interfejsu IEquatable, czyli wymagającego metody implementującej

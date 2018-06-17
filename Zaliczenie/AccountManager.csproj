@@ -82,7 +82,8 @@
       <SubType>Designer</SubType>
     </Page>
     <Compile Include="Account.cs" />
-    <Compile Include="AccountService.cs" />
+    <Compile Include="AccountNumber.cs" />
+    <Compile Include="AccountTypeName.cs" />
     <Compile Include="AccountWindow.xaml.cs">
       <DependentUpon>AccountWindow.xaml</DependentUpon>
     </Compile>
@@ -90,6 +91,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Client.cs" />
     <Compile Include="CreditCard.cs" />
     <Compile Include="CustomerWindow.xaml.cs">
       <DependentUpon>CustomerWindow.xaml</DependentUpon>

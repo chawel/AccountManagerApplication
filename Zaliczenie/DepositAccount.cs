@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace AccountManager
 {
-    class DepositAccount : Account
+    public class DepositAccount : Account
 	{
-		public DepositAccount(int identificationNumber) : base(identificationNumber, "Lokata") { }
+		public DepositAccount(int identificationNumber) : base(AccountType.DepositAccount, identificationNumber) { }
 
 		public override void DepositMoney(decimal cashAmount)
 		{
